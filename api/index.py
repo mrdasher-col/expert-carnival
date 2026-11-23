@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, request
 
 app = Flask(__name__)
 
@@ -16,3 +16,11 @@ def download_android():
 @app.route("/pc")
 def download_pc():
     return redirect(REDIRECT_URLS["/pc"], code=302)
+
+
+@app.route("/api/index")
+def download_from_rewrite():
+    original_path = request.headers.get("x-matched-path") or request.path
+    if original_path in REDIRECT_URLS:
+        return redirect(REDIRECT_URLS[original_path], code=302)
+    return "Not Found", 404
