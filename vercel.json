@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/android", "destination": "/api/index" },
+    { "source": "/pc", "destination": "/api/index" }
+  ]
+}
